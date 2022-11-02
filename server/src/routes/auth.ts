@@ -60,7 +60,7 @@ router.post("/login", async (req: Request, res: Response) => {
 
   //Check User Exists
   if (dbUser.length == 0) {
-    return res.status(409).json({ error: "No User Found" });
+    return res.status(400).json({ error: "No User Found" });
   }
 
   //Compare passwords
@@ -68,7 +68,7 @@ router.post("/login", async (req: Request, res: Response) => {
   const validUser = await compare(password, oldPassword);
 
   if (!validUser) {
-    return res.status(409).json({ error: "username or password is wrong" });
+    return res.status(400).json({ error: "username or password is wrong" });
   }
 
   //Login User, Return Token
