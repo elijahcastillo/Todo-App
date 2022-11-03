@@ -1,20 +1,28 @@
-import { verify } from "jsonwebtoken"
+import { NextFunction, Request, Response } from "express";
+import { verify } from "jsonwebtoken";
 
-const isAuthenticated = (parent, args, context) => {
-  const authorization = context.req.headers["authorization"];
+export const isAuthenticated = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const authorization = req.body.authorization;
+
+  console.log(authorization, "??");
 
   //nothing in the headers
-  if (!authorization) throw new Error("Not Authenticated 1");
+  if (!authorization) return res.status(400).json({ error: "No token" });
+
+  //get token: ex-> Bearer {token}
+  const token = authorization.split(" ")[1];
+  console.log(token);
 
   try {
-    //get token: ex-> Bearer {token}
-    const token = authorization.split(" ")[1];
-
     //get payload -> userId
-    const payload = verify(token, process.env.ACCESS_TOKEN_SECRET);
-    context.req.payload = payload;
+    const payload = verify(token, "accessToken");
+    req.body.payload = payload;
+    next();
   } catch (error) {
-    console.log(error, "isAuth Error Middleware");
-    throw new Error("Not Authenticated 2");
+    return res.status(400).json({ error: "Token not Good" });
   }
 };

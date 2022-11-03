@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import { verify, JwtPayload } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 import {
   createAccessToken,
   createRefreshToken,
@@ -8,8 +8,12 @@ import {
 import db from "../db";
 const router: Router = express.Router();
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
+  console.log(req.cookies);
+
   const token = req.cookies.jid;
+
+  console.log(token, "COOKIE");
 
   if (!token) {
     return res.send({ ok: false, accessToken: "", userId: "", username: "" });

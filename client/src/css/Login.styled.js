@@ -98,6 +98,7 @@ export const StyledLogin = styled.div`
     width: 100%;
     margin-top: 25px;
     background-color: #62c68e;
+    font-family: "Rubik", sans-serif;
     color: white;
     border: none;
     padding: 10px;

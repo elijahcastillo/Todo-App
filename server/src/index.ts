@@ -8,7 +8,12 @@ import authRouter from "./routes/auth";
 import refreshRouter from "./routes/refresh";
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000", "http://192.168.0.111:3000"],
+  })
+);
 app.use(bodyParser.json());
 app.use(cookieParser());
 

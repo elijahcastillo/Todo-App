@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { StyledLogin } from "../css/Login.styled";
 import Reminder from "../assets/Reminder.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setToken } from "../store/authStore";
 
 interface UserCredentials {
   username: string;
@@ -14,19 +17,31 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const loginUser = async () => {
     setLoading(true);
     const response = await axios
-      .post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      } as UserCredentials)
+      .post(
+        "http://localhost:3001/auth/login",
+        {
+          username,
+          password,
+        } as UserCredentials,
+        { withCredentials: true }
+      )
       .catch((error) => {
         return console.log(error.response.data.error);
       });
+
     setLoading(false);
     if (!response) return;
-    console.log(response);
+
+    console.log(response.data.accessToken);
+
+    dispatch(setToken(response.data.accessToken));
+    navigate("/home/all");
   };
 
   const signUpUser = async () => {

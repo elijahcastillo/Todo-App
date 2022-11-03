@@ -6,6 +6,7 @@ import {
   createRefreshToken,
   sendRefreshToken,
 } from "../helper/authHelp";
+import { isAuthenticated } from "../middleware/authCheck";
 const router: Router = express.Router();
 
 interface userData {
@@ -78,6 +79,14 @@ router.post("/login", async (req: Request, res: Response) => {
   sendRefreshToken(res, createRefreshToken(dbUser[0]));
 
   return res.status(200).json({ accessToken: token });
+});
+
+router.post("/check-token", isAuthenticated, (req: Request, res: Response) => {
+  const { username } = req.body.payload;
+  res.status(200).json({
+    ok: true,
+    username: username,
+  });
 });
 
 export default router;
