@@ -32,6 +32,12 @@ const GlobalStyle = createGlobalStyle`
     overflow-wrap: break-word;
     }
 
+    .offsetContainer{
+        background-color: rgb(242, 244, 247);;
+        margin-left: 250px;
+        padding: 20px 50px;
+        height: 100vh;
+    }
 
 `;
 

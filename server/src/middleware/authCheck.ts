@@ -6,21 +6,23 @@ export const isAuthenticated = (
   res: Response,
   next: NextFunction
 ) => {
-  const authorization = req.body.authorization;
+  const authorization = req.headers.authorization;
 
-  console.log(authorization, "??");
+  console.log("#################");
+  console.log(authorization, "Access Token Middleware");
 
   //nothing in the headers
   if (!authorization) return res.status(400).json({ error: "No token" });
 
   //get token: ex-> Bearer {token}
   const token = authorization.split(" ")[1];
-  console.log(token);
 
   try {
     //get payload -> userId
     const payload = verify(token, "accessToken");
     req.body.payload = payload;
+    console.log(payload, "PAYUP");
+    console.log("***************");
     next();
   } catch (error) {
     return res.status(400).json({ error: "Token not Good" });

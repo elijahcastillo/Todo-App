@@ -81,7 +81,7 @@ router.post("/login", async (req: Request, res: Response) => {
   return res.status(200).json({ accessToken: token });
 });
 
-router.post("/check-token", isAuthenticated, (req: Request, res: Response) => {
+router.get("/check-token", isAuthenticated, (req: Request, res: Response) => {
   const { username } = req.body.payload;
   res.status(200).json({
     ok: true,

@@ -3,9 +3,11 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import authRouter from "./routes/auth";
 
+//routers
+import authRouter from "./routes/auth";
 import refreshRouter from "./routes/refresh";
+import taskListRouter from "./routes/taskList";
 
 const app = express();
 app.use(
@@ -20,6 +22,7 @@ app.use(cookieParser());
 //routes
 app.use("/auth", authRouter);
 app.use("/refresh", refreshRouter);
+app.use("/task-list", taskListRouter);
 
 app.listen("3001", (): void => {
   console.log("Server Running on port 3001");

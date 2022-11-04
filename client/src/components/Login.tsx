@@ -22,6 +22,7 @@ const Login = () => {
 
   const loginUser = async () => {
     setLoading(true);
+
     const response = await axios
       .post(
         "http://localhost:3001/auth/login",
@@ -38,7 +39,7 @@ const Login = () => {
     setLoading(false);
     if (!response) return;
 
-    console.log(response.data.accessToken);
+    //console.log(response.data.accessToken);
 
     dispatch(setToken(response.data.accessToken));
     navigate("/home/all");

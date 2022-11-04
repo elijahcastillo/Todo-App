@@ -10,10 +10,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUsername: (state, payload) => {
-      state.username = payload;
+      state.username = payload.payload;
     },
     setToken: (state, payload) => {
-      console.log(payload, "TOKKKK");
       state.accessToken = payload.payload;
     },
   },

@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
   const token = req.cookies.jid;
 
-  console.log(token, "COOKIE");
+  //console.log(token, "COOKIE");
 
   if (!token) {
     return res.send({ ok: false, accessToken: "", userId: "", username: "" });

@@ -17,8 +17,3 @@ export const sendRefreshToken = (res: any, token: any) => {
     httpOnly: true,
   });
 };
-
-// {
-//   "username": "person2",
-//   "password": "secret"
-// }
