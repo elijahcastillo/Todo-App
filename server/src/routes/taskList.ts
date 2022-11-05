@@ -8,8 +8,6 @@ router.post("/create", isAuthenticated, async (req: Request, res: Response) => {
   const { name } = req.body;
   const { userId } = req.body.payload;
 
-  console.log(userId, name, "LIST");
-
   await db("INSERT INTO task_list (name, userId) VALUES (?,?)", [
     name,
     userId,
@@ -21,14 +19,12 @@ router.post("/create", isAuthenticated, async (req: Request, res: Response) => {
 
   //get Id of inserted Row to send back
   const insertedId = data[0]["LAST_INSERT_ID()"];
-  console.log;
 
   return res.status(200).json({ ok: true, id: insertedId });
 });
 
 router.get("/", isAuthenticated, async (req: Request, res: Response) => {
   const { userId } = req.body.payload;
-  console.log(userId, "ID GETLIST");
 
   const data = await db("SELECT id, name FROM task_list WHERE userId=(?)", [
     userId,
@@ -36,7 +32,6 @@ router.get("/", isAuthenticated, async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Cannot get task list" });
   });
 
-  console.log(data, "GET ALL TASKS");
   return res.status(200).json({ ok: true, taskList: data });
 });
 

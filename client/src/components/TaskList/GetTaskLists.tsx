@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useAxios from "../../hooks/useAxios";
+import { setTaskList } from "../../store/authStore";
 import TaskListItem from "./TaskListItem";
 
 export interface TaskList {
@@ -9,9 +10,10 @@ export interface TaskList {
 }
 
 const GetTaskLists = () => {
-  const { accessToken } = useSelector((state: any) => state.auth);
+  const { accessToken, TaskList } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
 
-  const [data, setData] = useState<TaskList[]>([]);
+  //const [data, setData] = useState<TaskList[]>([]);
   const { res, err, loading }: any = useAxios({
     url: "/task-list",
     method: "get",
@@ -22,7 +24,10 @@ const GetTaskLists = () => {
   });
 
   useEffect(() => {
-    if (res && res.data) setData(res.data.taskList);
+    if (res && res.data) {
+      const data: TaskList[] = res.data.taskList;
+      dispatch(setTaskList(data));
+    }
   }, [res]);
 
   if (err) return <div>Error</div>;
@@ -30,7 +35,7 @@ const GetTaskLists = () => {
 
   return (
     <div>
-      {data.map((item, i) => {
+      {TaskList.map((item: any, i: number) => {
         return <TaskListItem id={item.id} name={item.name} key={i} />;
       })}
     </div>

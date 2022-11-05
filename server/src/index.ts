@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth";
 import refreshRouter from "./routes/refresh";
 import taskListRouter from "./routes/taskList";
+import taskItemRouter from "./routes/taskItem";
 
 const app = express();
 app.use(
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/auth", authRouter);
 app.use("/refresh", refreshRouter);
 app.use("/task-list", taskListRouter);
+app.use("/task-item", taskItemRouter);
 
 app.listen("3001", (): void => {
   console.log("Server Running on port 3001");
