@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import useAxios from "../../hooks/useAxios";
-import { setTaskList } from "../../store/authStore";
 import TaskListItem from "./TaskListItem";
+import { useGetAllTaskListsQuery } from "../../redux/api";
+import { useNavigate, useParams } from "react-router-dom";
+import { StyledListItem } from "../../css/TaskList.styled";
 
 export interface TaskList {
   id: number;
@@ -10,35 +10,43 @@ export interface TaskList {
 }
 
 const GetTaskLists = () => {
-  const { accessToken, TaskList } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
+  const { listId }: any = useParams();
+  const navigate = useNavigate();
 
-  //const [data, setData] = useState<TaskList[]>([]);
-  const { res, err, loading }: any = useAxios({
-    url: "/task-list",
-    method: "get",
-    body: {},
-    headers: {
-      authorization: `bearer ${accessToken}`,
-    },
-  });
+  const { data, error, isLoading } = useGetAllTaskListsQuery(undefined);
+  console.log(data, "FF");
 
-  useEffect(() => {
-    if (res && res.data) {
-      const data: TaskList[] = res.data.taskList;
-      dispatch(setTaskList(data));
-    }
-  }, [res]);
+  // useEffect(() => {
+  //   if (data) {
+  //     let validTaskId = false;
+  //     data.taskList.forEach((el: TaskList) => {
+  //       console.log(listId.includes(el.id), "MMM");
 
-  if (err) return <div>Error</div>;
-  if (loading) return <div>...Loading</div>;
+  //       if (listId.includes(el.id)) {
+  //         console.log("???");
+
+  //         validTaskId = true;
+  //       }
+  //     });
+  //     console.log(validTaskId, "pp");
+
+  //     if (!validTaskId) {
+  //       console.log("WHAT");
+
+  //       navigate("/home/all");
+  //     }
+  //   }
+  // }, [listId]);
+
+  if (isLoading) return <div>...Loading</div>;
+  if (error) return <div>Error</div>;
 
   return (
-    <div>
-      {TaskList.map((item: any, i: number) => {
+    <StyledListItem>
+      {data.taskList.map((item: any, i: number) => {
         return <TaskListItem id={item.id} name={item.name} key={i} />;
       })}
-    </div>
+    </StyledListItem>
   );
 };
 

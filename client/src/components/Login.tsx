@@ -4,7 +4,7 @@ import Reminder from "../assets/Reminder.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setToken } from "../store/authStore";
+import { setToken } from "../redux/slices/authSlice";
 
 interface UserCredentials {
   username: string;

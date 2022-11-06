@@ -1,45 +1,22 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import { StyledCreate } from "../../css/TaskHome.styled";
 import { useParams } from "react-router-dom";
-import { ITaskItem } from "./TaskHome";
+import { useAddTaskItemMutation } from "../../redux/api";
 
-interface CreateItemProps {
-  setTaskItems: React.Dispatch<React.SetStateAction<ITaskItem[]>>;
-}
-
-const CreateTaskItem = ({ setTaskItems }: CreateItemProps) => {
+const CreateTaskItem = () => {
   const [taskName, setTaskName] = useState<string>("");
   const [taskDate, setTaskDate] = useState<string>("");
-  const { accessToken } = useSelector((state: any) => state.auth);
   const { listId } = useParams();
 
+  const [addNewItem, result] = useAddTaskItemMutation();
+
   const addItem = () => {
-    axios
-      .post(
-        "http://localhost:3001/task-item/create",
-        {
-          name: taskName,
-          date: taskDate,
-          listId: listId,
-        },
-        {
-          headers: {
-            authorization: `bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        //Add new task to prev array
-        setTaskItems((prev) => [
-          ...prev,
-          { id: res.data.id, name: taskName, date: taskDate, compleated: 0 },
-        ]);
-      })
-      .catch((error) => {
-        return console.log(error.response.data.error);
-      });
+    addNewItem({
+      name: taskName,
+      date: taskDate,
+      listId: listId,
+    });
+
     setTaskDate("");
     setTaskName("");
   };

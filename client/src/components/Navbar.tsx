@@ -16,8 +16,10 @@ const Navbar = () => {
           Welcome Back,<br></br> {username}!
         </p>
       </div>
+      <Link to="/home/create" className="addTaskList">
+        +
+      </Link>
       <div className="middleSection">
-        <Link to="/home/create">+</Link>
         <GetTaskLists />
       </div>
       <div className="bottomSection"></div>

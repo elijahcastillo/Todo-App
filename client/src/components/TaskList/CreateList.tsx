@@ -5,36 +5,22 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { TaskList } from "./GetTaskLists";
-import { setTaskList } from "../../store/authStore";
+import { setTaskList } from "../../redux/slices/authSlice";
+
+import { useAddTaskListMutation } from "../../redux/api";
 
 const CreateList = () => {
   const [listName, setListName] = useState("");
-  const { accessToken, TaskList } = useSelector((state) => state.auth);
-  const disptach = useDispatch();
+  //const { accessToken, TaskList } = useSelector((state) => state.auth);
+  //const disptach = useDispatch();
+
+  const [addNewTask, result] = useAddTaskListMutation();
 
   const addTask = () => {
-    console.log("Add Task", listName);
-
-    axios
-      .post(
-        "http://localhost:3001/task-list/create",
-        {
-          name: listName,
-        },
-        {
-          headers: {
-            authorization: `bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data, "ADD");
-        const newTaskList = [...TaskList, { id: res.data.id, name: listName }];
-        disptach(setTaskList(newTaskList));
-      })
-      .catch((error) => {
-        return console.log(error);
-      });
+    addNewTask({ name: listName })
+      .unwrap()
+      .then((fulfilled) => console.log(fulfilled))
+      .catch((rejected) => console.error(rejected));
 
     setListName("");
   };

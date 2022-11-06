@@ -12,7 +12,7 @@ export const StyledNavbar = styled.div`
     align-items: center;
     width: 100%;
     height: 10%;
-    outline: 1px solid blue;
+    border-bottom: 1px solid #b6b5b5;
 
     .logo {
       font-size: 2.2em;
@@ -27,11 +27,21 @@ export const StyledNavbar = styled.div`
       color: #7f7d7d;
     }
   }
-
+  .addTaskList {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bolder;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0px 0px 4px 0px #d3d3d3;
+  }
   .middleSection {
     width: 100%;
     height: 70%;
-    outline: 1px solid orange;
+
+    overflow-y: auto;
   }
 
   .bottomSection {

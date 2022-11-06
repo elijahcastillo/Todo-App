@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken, setUsername } from "../store/authStore";
+import { setToken, setUsername } from "../redux/slices/authSlice";
 
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);

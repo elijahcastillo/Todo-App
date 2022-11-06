@@ -1,17 +1,20 @@
 import React from "react";
-import { ITaskItem } from "./TaskHome";
+import { ITaskItem } from "../../types/allTypes";
+import { useGetTaskItemByIdQuery } from "../../redux/api";
+import { useParams } from "react-router-dom";
 
-interface TaskItemProps {
-  taskItems: ITaskItem[];
-}
+const DisplayTaskItems = () => {
+  const { listId } = useParams();
+  const { data, error, isLoading } = useGetTaskItemByIdQuery({ listId });
 
-const DisplayTaskItems = ({ taskItems }: TaskItemProps) => {
+  if (isLoading) return <div>...Loading</div>;
+  if (error) return <div>Error</div>;
   return (
-    <div>
-      {taskItems.map((item: ITaskItem) => {
+    <>
+      {data.taskItems.map((item: ITaskItem) => {
         return <div>{item.name}</div>;
       })}
-    </div>
+    </>
   );
 };
 

@@ -28,18 +28,21 @@ router.get("/", isAuthenticated, async (req: Request, res: Response) => {
 
   const data = await db("SELECT id, name FROM task_list WHERE userId=(?)", [
     userId,
-  ]).catch((error: Error) => {
+  ]).catch(() => {
     return res.status(500).json({ error: "Cannot get task list" });
   });
 
   return res.status(200).json({ ok: true, taskList: data });
 });
 
-router.post("/test", async (req: Request, res: Response) => {
-  const head = req.headers.authorization;
-  console.log(head, "OOOO");
+router.post("/delete", async (req: Request, res: Response) => {
+  const { listId } = req.body;
 
-  return res.status(202).send(head);
+  await db("DELETE from task_list WHERE id=(?)", [listId]).catch(() => {
+    return res.status(500).json({ error: "Cannot delete task list" });
+  });
+
+  return res.status(200).json({ ok: true });
 });
 
 export default router;
