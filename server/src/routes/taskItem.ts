@@ -38,4 +38,32 @@ router.post("/by-id", isAuthenticated, async (req: Request, res: Response) => {
   return res.status(200).json({ ok: true, taskItems: data });
 });
 
+router.post("/delete", isAuthenticated, async (req: Request, res: Response) => {
+  const { id } = req.body;
+
+  await db("DELETE from task_item WHERE id=(?)", [id]).catch(() => {
+    return res.status(500).json({ error: "Connot Delete Task Item" });
+  });
+
+  return res.status(200).json({ ok: true });
+});
+
+router.post(
+  "/update-compleation",
+  isAuthenticated,
+  async (req: Request, res: Response) => {
+    const { id } = req.body;
+
+    await db("UPDATE task_item SET compleated = NOT compleated WHERE id=(?)", [
+      id,
+    ]).catch(() => {
+      return res
+        .status(500)
+        .json({ error: "Connot Update Compleation of Task Item" });
+    });
+
+    return res.status(200).json({ ok: true });
+  }
+);
+
 export default router;

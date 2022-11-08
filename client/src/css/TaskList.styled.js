@@ -15,19 +15,11 @@ export const StyledListItem = styled.div`
     color: black;
   }
 
-  .taskListLink:hover {
-    background-color: #f2f2f2;
-
-    .DelTask {
-      display: block;
-    }
+  .ListLinkActive {
+    background-color: #e0dfdf;
   }
 
-  .DelTask {
-    color: red;
-    font-weight: bold;
-    font-size: 1.25em;
-
-    display: none;
+  .taskListLink:hover {
+    //background-color: #f2f2f2;
   }
 `;

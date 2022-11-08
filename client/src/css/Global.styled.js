@@ -36,7 +36,25 @@ const GlobalStyle = createGlobalStyle`
         background-color: rgb(242, 244, 247);;
         margin-left: 250px;
         padding: 20px 50px;
-        height: 100vh;
+        min-height: 100vh;
+    }
+
+    .offsetPageContainer{
+        background-color: rgb(242, 244, 247);;
+        margin-left: 250px;
+        margin-top: 75px;
+        padding: 20px 50px;
+        min-height: 100vh;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .offsetContainer{
+            margin-left: 0;
+        }
+
+        .offsetPageContainer{
+            margin-left: 0;
+        }
     }
 
 `;

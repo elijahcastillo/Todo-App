@@ -16,28 +16,6 @@ const GetTaskLists = () => {
   const { data, error, isLoading } = useGetAllTaskListsQuery(undefined);
   console.log(data, "FF");
 
-  // useEffect(() => {
-  //   if (data) {
-  //     let validTaskId = false;
-  //     data.taskList.forEach((el: TaskList) => {
-  //       console.log(listId.includes(el.id), "MMM");
-
-  //       if (listId.includes(el.id)) {
-  //         console.log("???");
-
-  //         validTaskId = true;
-  //       }
-  //     });
-  //     console.log(validTaskId, "pp");
-
-  //     if (!validTaskId) {
-  //       console.log("WHAT");
-
-  //       navigate("/home/all");
-  //     }
-  //   }
-  // }, [listId]);
-
   if (isLoading) return <div>...Loading</div>;
   if (error) return <div>Error</div>;
 

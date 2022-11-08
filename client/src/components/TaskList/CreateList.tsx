@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { StyledCreateList } from "../../css/CreateList.styled";
 import { StyledCreate } from "../../css/TaskHome.styled";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { TaskList } from "./GetTaskLists";
-import { setTaskList } from "../../redux/slices/authSlice";
 
 import { useAddTaskListMutation } from "../../redux/api";
 

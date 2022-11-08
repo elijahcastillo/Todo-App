@@ -63,6 +63,28 @@ export const todoApi = createApi({
       }),
       invalidatesTags: ["TaskItem"],
     }),
+    deleteTaskItem: builder.mutation({
+      query: (payload) => ({
+        url: "task-item/delete",
+        method: "POST",
+        body: payload,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["TaskItem"],
+    }),
+    updateCompleationTaskItem: builder.mutation({
+      query: (payload) => ({
+        url: "task-item/update-compleation",
+        method: "POST",
+        body: payload,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["TaskItem"],
+    }),
   }),
 });
 
@@ -72,4 +94,6 @@ export const {
   useGetTaskItemByIdQuery,
   useAddTaskItemMutation,
   useDeleteTaskListMutation,
+  useDeleteTaskItemMutation,
+  useUpdateCompleationTaskItemMutation,
 } = todoApi;

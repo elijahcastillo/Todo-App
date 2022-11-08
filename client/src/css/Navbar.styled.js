@@ -1,10 +1,40 @@
 import styled from "styled-components";
 
 export const StyledNavbar = styled.div`
-  width: 250px;
-  height: 100vh;
-  position: absolute;
-  box-shadow: 1px 2px 3px 2px #d3d3d3;
+  .container {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    box-shadow: 1px 2px 3px 2px #d3d3d3;
+    z-index: 20;
+    background-color: #fff;
+  }
+  .showNav {
+    transform: translateX(0px) !important;
+    transition: all 300ms ease-in-out;
+  }
+
+  .smallNav {
+    position: fixed;
+    top: 0;
+    height: 75px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    display: none;
+  }
+  .mask {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 
   .topSection {
     display: flex;
@@ -14,12 +44,6 @@ export const StyledNavbar = styled.div`
     height: 10%;
     border-bottom: 1px solid #b6b5b5;
 
-    .logo {
-      font-size: 2.2em;
-      color: #5ee484;
-      font-family: "Rubik", sans-serif;
-    }
-
     .username {
       font-family: "Open Sans", sans-serif;
       font-size: 0.9em;
@@ -27,6 +51,21 @@ export const StyledNavbar = styled.div`
       color: #7f7d7d;
     }
   }
+
+  .logo {
+    font-size: 2.2em;
+    color: #5ee484;
+    font-family: "Rubik", sans-serif;
+  }
+
+  //Small Nav List Info
+  .taskInfo {
+    padding: 10px;
+    border-bottom: 1px solid #b6b5b5;
+
+    display: none;
+  }
+
   .addTaskList {
     display: flex;
     width: 100%;
@@ -39,14 +78,29 @@ export const StyledNavbar = styled.div`
   }
   .middleSection {
     width: 100%;
-    height: 70%;
+    height: 55%;
 
     overflow-y: auto;
   }
 
   .bottomSection {
     width: 100%;
-    height: 20%;
+    height: 35%;
     outline: 1px solid purple;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .container {
+      transform: translateX(-500px);
+      box-shadow: none;
+    }
+
+    .smallNav {
+      display: flex;
+    }
+
+    .taskInfo {
+      display: block;
+    }
   }
 `;

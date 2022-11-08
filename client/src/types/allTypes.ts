@@ -5,4 +5,10 @@ interface ITaskItem {
   compleated: number;
 }
 
+export enum ItemFilter {
+  ALL,
+  COMPLEATED,
+  TODO,
+}
+
 export type { ITaskItem };

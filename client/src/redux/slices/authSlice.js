@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   username: "",
   accessToken: "",
-  TaskList: [],
+  showNav: false,
 };
 
 export const authSlice = createSlice({
@@ -17,15 +17,11 @@ export const authSlice = createSlice({
       state.accessToken = action.payload;
     },
 
-    setListId: (state, action) => {
-      state.currentListId = action.payload;
-    },
-    setTaskList: (state, action) => {
-      state.TaskList = action.payload;
+    setNav: (state, action) => {
+      state.showNav = action.payload;
     },
   },
 });
 
 export default authSlice.reducer;
-export const { setUsername, setToken, setListId, setTaskList } =
-  authSlice.actions;
+export const { setUsername, setToken, setNav } = authSlice.actions;

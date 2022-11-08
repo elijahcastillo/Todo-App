@@ -57,23 +57,72 @@ export const StyledCreate = styled.div`
     color: white;
   }
 
-  .backBtn {
-    border: none;
-    padding: 0.5rem 2rem;
-    background-color: #51a9fc;
-    color: white;
-    border-radius: 5px;
-
-    margin-top: 30px;
-    cursor: pointer;
-  }
-
   @media only screen and (max-width: 900px) {
     .title {
       font-size: 1.3em;
     }
     .newTaskInputWrapper {
       flex-direction: column;
+    }
+  }
+`;
+
+export const StyledTaskItem = styled.div`
+  width: 100%;
+  min-height: 50px;
+  outline: 1px solid red;
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  font-family: "Rubik", sans-serif;
+
+  .contentContainer {
+    width: 100%;
+
+    .content {
+      font-size: 1.1em;
+    }
+
+    .contentDate {
+      font-size: 0.8em;
+      color: #999999;
+    }
+  }
+
+  .taskIcons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 5px;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+
+  .icon > path {
+    fill: black;
+  }
+
+  .checkmark:hover,
+  .checkmarkActive {
+    path {
+      fill: green;
+    }
+  }
+
+  .trash:hover {
+    path {
+      fill: red;
+    }
+  }
+
+  .UnDo:hover,
+  .UnDoActive {
+    path {
+      fill: orange;
     }
   }
 `;

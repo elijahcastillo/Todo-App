@@ -17,7 +17,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="home/all" element={<div></div>} />
           <Route path="home/create" element={<CreateList />} />
-          <Route path="home/:listId" element={<TaskHome />} />
+          <Route path="home/:listId/:listName" element={<TaskHome />} />
         </Route>
       </Routes>
     </BrowserRouter>
