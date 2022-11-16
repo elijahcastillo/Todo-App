@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyledNavbar } from "../css/Navbar.styled";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import GetTaskLists from "./TaskList/GetTaskLists";
 import { setNav } from "../redux/slices/authSlice";
@@ -9,7 +9,17 @@ import FilterTaskItems from "./InfoBar/FilterTaskItems";
 
 const Navbar = () => {
   const { username, showNav } = useSelector((state: any) => state.auth);
+  const [showListInfo, setShowListInfo] = useState(true);
   const dispatch = useDispatch();
+
+  const { listId } = useParams();
+  useEffect(() => {
+    if (listId === undefined) {
+      setShowListInfo(false);
+    } else {
+      setShowListInfo(true);
+    }
+  }, [listId]);
 
   return (
     <StyledNavbar>
@@ -34,10 +44,12 @@ const Navbar = () => {
         >
           +
         </Link>
-        <div className="taskInfo">
-          <TaskStatus />
-          <FilterTaskItems />
-        </div>
+        {showListInfo ? (
+          <div className="taskInfo">
+            <TaskStatus />
+            <FilterTaskItems />
+          </div>
+        ) : null}
 
         <div className="middleSection">
           <GetTaskLists />

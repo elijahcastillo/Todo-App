@@ -70,7 +70,7 @@ export const StyledCreate = styled.div`
 export const StyledTaskItem = styled.div`
   width: 100%;
   min-height: 50px;
-  outline: 1px solid red;
+  //outline: 1px solid red;
   margin-top: 15px;
   display: flex;
   gap: 20px;

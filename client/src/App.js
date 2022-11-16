@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { Outlet } from "react-router";
 import CreateList from "./components/TaskList/CreateList";
 import TaskHome from "./components/TaskItem/TaskHome";
+import Homepage from "./components/Homepage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Login />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="home/all" element={<div></div>} />
+          <Route path="home/all" element={<Homepage />} />
           <Route path="home/create" element={<CreateList />} />
           <Route path="home/:listId/:listName" element={<TaskHome />} />
         </Route>

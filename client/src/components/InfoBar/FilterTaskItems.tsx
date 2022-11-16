@@ -1,12 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledFilter } from "../../css/InfoBar.styled";
-import { setFilter } from "../../redux/slices/taskItemSlice";
-import { ItemFilter } from "../../types/allTypes";
+import { setFilter, setSort } from "../../redux/slices/taskItemSlice";
+import { ItemFilter, ItemDateSort } from "../../types/allTypes";
+import { useDeleteTaskListMutation } from "../../redux/api";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FilterTaskItems = () => {
-  const { filterItem } = useSelector((state: any) => state.taskItem);
+  //Date.parse(... ms) for sort func
+  const { filterItem, sortItem } = useSelector((state: any) => state.taskItem);
+  const [deleteList] = useDeleteTaskListMutation();
+  const { listId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const delList = () => {
+    deleteList({ listId });
+    navigate("/home/all");
+  };
+
   return (
     <StyledFilter>
       <div className="filterWrapper">
@@ -41,7 +53,33 @@ const FilterTaskItems = () => {
           Todo
         </div>
       </div>
-      <button className="DelList">Delete</button>
+      {/*Sorting*/}
+      <div>
+        <div
+          className={
+            sortItem == ItemDateSort.ASCENDING
+              ? "filterItem filterActive"
+              : "filterItem"
+          }
+          onClick={() => dispatch(setSort(ItemDateSort.ASCENDING))}
+        >
+          Up
+        </div>
+
+        <div
+          className={
+            sortItem == ItemDateSort.DESCENDING
+              ? "filterItem filterActive"
+              : "filterItem"
+          }
+          onClick={() => dispatch(setSort(ItemDateSort.DESCENDING))}
+        >
+          Down
+        </div>
+      </div>
+      <button className="DelList" onClick={delList}>
+        Delete
+      </button>
     </StyledFilter>
   );
 };

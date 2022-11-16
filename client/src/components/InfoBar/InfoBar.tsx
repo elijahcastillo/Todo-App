@@ -8,12 +8,6 @@ import { useDeleteTaskListMutation } from "../../redux/api";
 const InfoBar = () => {
   const { listId, listName } = useParams();
   const navigate = useNavigate();
-  const [deleteList] = useDeleteTaskListMutation();
-
-  const delList = () => {
-    deleteList({ listId });
-    navigate("/home/all");
-  };
 
   //Todo: Filter - dispatch to store, use Enum and import in both components, based on the value in store, change displayed data
 

@@ -11,4 +11,9 @@ export enum ItemFilter {
   TODO,
 }
 
+export enum ItemDateSort {
+  ASCENDING,
+  DESCENDING,
+}
+
 export type { ITaskItem };

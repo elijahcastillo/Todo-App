@@ -11,16 +11,25 @@ import { ReactComponent as Check } from "../../assets/check-circle.svg";
 const TaskItem = ({ id, name, date, compleated }: ITaskItem) => {
   const [deleteTask] = useDeleteTaskItemMutation();
   const [updateCompleation] = useUpdateCompleationTaskItemMutation();
+
+  const handleUpdate = (type: boolean) => {
+    //Check if trying to compleate an already compleated task
+    if (type === Boolean(compleated)) {
+      return;
+    }
+    updateCompleation({ id });
+  };
+
   return (
     <StyledTaskItem>
       <div className="taskIcons">
         <Check
           className={compleated ? "icon checkmarkActive " : "icon checkmark"}
-          onClick={() => updateCompleation({ id })}
+          onClick={() => handleUpdate(true)}
         />
         <UnDo
           className={compleated ? "icon UnDo" : "icon UnDoActive"}
-          onClick={() => updateCompleation({ id })}
+          onClick={() => handleUpdate(false)}
         />
         <Trash className="icon trash" onClick={() => deleteTask({ id })} />
       </div>

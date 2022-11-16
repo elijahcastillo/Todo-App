@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ITaskItem } from "../../types/allTypes";
+import { ITaskItem, ItemDateSort } from "../../types/allTypes";
 import { useGetTaskItemByIdQuery } from "../../redux/api";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,28 @@ const DisplayTaskItems = () => {
   const [taskItemsData, setTaskItemsData] = useState<ITaskItem[]>([]);
 
   //current selection on filter
-  const { filterItem } = useSelector((state: any) => state.taskItem);
+  const { filterItem, sortItem } = useSelector((state: any) => state.taskItem);
 
   const { data, error, isLoading } = useGetTaskItemByIdQuery({ listId });
+
+  //helper Function
+  const sortDates = (toSort: ITaskItem[]) => {
+    //sort the data
+    const sortedData = toSort.sort((a, b) => {
+      if (Date.parse(a.date) > Date.parse(b.date)) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    //reverse if needed
+    if (sortItem === ItemDateSort.ASCENDING) {
+      return sortedData;
+    } else if (sortItem === ItemDateSort.DESCENDING) {
+      return sortedData.reverse();
+    }
+  };
 
   useEffect(() => {
     //Get number of compleated items
@@ -40,14 +59,15 @@ const DisplayTaskItems = () => {
         }
       });
 
-      //update Filter
-      setTaskItemsData(filteredList);
+      //update List
+      const updatedList: ITaskItem[] = sortDates(filteredList) as ITaskItem[];
+      setTaskItemsData(updatedList);
 
       //update Status
       dispatch(setCompleated(totalCompleated));
       dispatch(setTotal(data.taskItems.length));
     }
-  }, [data, filterItem]);
+  }, [data, filterItem, sortItem]);
 
   if (isLoading) return <div>...Loading</div>;
   if (error) return <div>Error</div>;

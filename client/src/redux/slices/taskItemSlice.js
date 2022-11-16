@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ItemFilter } from "../../types/allTypes";
+import { ItemDateSort, ItemFilter } from "../../types/allTypes";
 
 const initialState = {
   compleated: 0,
   total: 0,
   filterItem: ItemFilter.ALL,
+  sortItem: ItemDateSort.ASCENDING,
 };
 
 export const taskItemSlice = createSlice({
@@ -20,8 +21,12 @@ export const taskItemSlice = createSlice({
     setFilter: (state, action) => {
       state.filterItem = action.payload;
     },
+    setSort: (state, action) => {
+      state.sortItem = action.payload;
+    },
   },
 });
 
 export default taskItemSlice.reducer;
-export const { setCompleated, setTotal, setFilter } = taskItemSlice.actions;
+export const { setCompleated, setTotal, setFilter, setSort } =
+  taskItemSlice.actions;
