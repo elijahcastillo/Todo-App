@@ -57,8 +57,8 @@ export const StyledFilter = styled.div`
   }
   .filterItem {
     padding: 2px 10px;
-
     cursor: pointer;
+    text-align: center;
   }
 
   .filterActive {
