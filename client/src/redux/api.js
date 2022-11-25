@@ -85,6 +85,18 @@ export const todoApi = createApi({
       }),
       invalidatesTags: ["TaskItem"],
     }),
+
+    updateTaskItem: builder.mutation({
+      query: (payload) => ({
+        url: "task-item/update",
+        method: "POST",
+        body: payload,
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }),
+      invalidatesTags: ["TaskItem"],
+    }),
   }),
 });
 
@@ -96,4 +108,5 @@ export const {
   useDeleteTaskListMutation,
   useDeleteTaskItemMutation,
   useUpdateCompleationTaskItemMutation,
+  useUpdateTaskItemMutation,
 } = todoApi;

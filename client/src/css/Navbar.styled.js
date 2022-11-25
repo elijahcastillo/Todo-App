@@ -9,10 +9,10 @@ export const StyledNavbar = styled.div`
     box-shadow: 1px 2px 3px 2px #d3d3d3;
     z-index: 20;
     background-color: #fff;
+    transition: all 300ms ease-in-out;
   }
   .showNav {
     transform: translateX(0px) !important;
-    transition: all 300ms ease-in-out;
   }
 
   .smallNav {

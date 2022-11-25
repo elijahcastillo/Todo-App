@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const StyledTaskHome = styled.div``;
 
 export const StyledCreate = styled.div`
+  margin-bottom: 30px;
+
   .title {
     color: #666565a0;
     font-size: 1.5em;
@@ -123,6 +125,12 @@ export const StyledTaskItem = styled.div`
   .UnDoActive {
     path {
       fill: orange;
+    }
+  }
+
+  .edit:hover {
+    path {
+      fill: blue;
     }
   }
 `;

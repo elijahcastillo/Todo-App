@@ -54,7 +54,8 @@ const FilterTaskItems = () => {
         </div>
       </div>
       {/*Sorting*/}
-      <div>
+      <div className="sortingWrapper">
+        {/* <div className="sortTitle">Date</div> */}
         <div
           className={
             sortItem == ItemDateSort.ASCENDING

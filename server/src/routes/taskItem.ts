@@ -25,8 +25,6 @@ router.post("/create", isAuthenticated, async (req: Request, res: Response) => {
 router.post("/by-id", isAuthenticated, async (req: Request, res: Response) => {
   const { userId } = req.body.payload;
   const { listId } = req.body;
-  console.log(userId, listId, "TESTING");
-  console.log(req.body, "???????");
 
   const data = await db(
     "SELECT task_item.id, task_item.name, task_item.date, task_item.compleated FROM task_item JOIN task_list ON task_item.listId = task_list.id WHERE userId = (?) AND listId = (?)",
@@ -65,5 +63,25 @@ router.post(
     return res.status(200).json({ ok: true });
   }
 );
+
+router.post("/update", isAuthenticated, async (req: Request, res: Response) => {
+  console.log("Update Task Text");
+  const { taskId } = req.body;
+  const { newName } = req.body;
+  const { newDate } = req.body;
+
+  console.log(taskId, newName, newDate, "WORK PLEASE");
+
+  await db("UPDATE task_item SET name=(?),date=(?) WHERE id=(?)", [
+    newName,
+    newDate,
+    taskId,
+  ]).catch(() => {
+    console.log("BAD");
+    return res.status(201).json({ error: "Connot Update Item" });
+  });
+
+  return res.status(200).json({ ok: true });
+});
 
 export default router;

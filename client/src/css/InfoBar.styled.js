@@ -5,14 +5,15 @@ export const StyledInfoBar = styled.div`
   position: fixed;
   top: 0;
   left: 252px;
-  width: 82%;
+  width: calc(100vw - 200px);
 
-  height: 75px;
+  height: 80px;
   background-color: white;
   padding: 0 20px;
 
   display: flex;
   align-items: center;
+  gap: 20px;
 
   .listTitle {
     font-size: 1.5em;
@@ -48,7 +49,8 @@ export const StyledStatus = styled.div`
 export const StyledFilter = styled.div`
   display: flex;
   align-items: center;
-  gap: 25px;
+
+  gap: 35px;
   font-family: "Rubik", sans-serif;
 
   .filterWrapper {
@@ -65,6 +67,16 @@ export const StyledFilter = styled.div`
     border-radius: 15px;
     background-color: #70b2df;
     color: white;
+  }
+
+  .sortingWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .sortTitle {
+    text-align: center;
   }
 
   .DelList {
