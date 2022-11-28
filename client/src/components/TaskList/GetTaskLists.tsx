@@ -3,6 +3,7 @@ import TaskListItem from "./TaskListItem";
 import { useGetAllTaskListsQuery } from "../../redux/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { StyledListItem } from "../../css/TaskList.styled";
+import LoadingSpinner from "../LoadingSpinner";
 
 export interface TaskList {
   id: number;
@@ -10,13 +11,9 @@ export interface TaskList {
 }
 
 const GetTaskLists = () => {
-  const { listId }: any = useParams();
-  const navigate = useNavigate();
-
   const { data, error, isLoading } = useGetAllTaskListsQuery(undefined);
-  console.log(data, "FF");
 
-  if (isLoading) return <div>...Loading</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>Error</div>;
 
   return (

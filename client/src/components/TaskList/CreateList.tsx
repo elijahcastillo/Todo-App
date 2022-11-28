@@ -7,10 +7,8 @@ import { useAddTaskListMutation } from "../../redux/api";
 
 const CreateList = () => {
   const [listName, setListName] = useState("");
-  //const { accessToken, TaskList } = useSelector((state) => state.auth);
-  //const disptach = useDispatch();
 
-  const [addNewTask, result] = useAddTaskListMutation();
+  const [addNewTask] = useAddTaskListMutation();
 
   const addTask = () => {
     addNewTask({ name: listName })

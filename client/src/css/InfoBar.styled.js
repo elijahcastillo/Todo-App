@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const StyledInfoBar = styled.div`
-  outline: 1px solid limegreen;
   position: fixed;
   top: 0;
   left: 252px;
   width: calc(100vw - 200px);
+  box-shadow: 1px 2px 3px 2px #d3d3d3;
 
   height: 80px;
   background-color: white;

@@ -77,7 +77,6 @@ router.post("/update", isAuthenticated, async (req: Request, res: Response) => {
     newDate,
     taskId,
   ]).catch(() => {
-    console.log("BAD");
     return res.status(201).json({ error: "Connot Update Item" });
   });
 

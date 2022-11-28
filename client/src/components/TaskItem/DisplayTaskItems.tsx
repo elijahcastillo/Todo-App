@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCompleated, setTotal } from "../../redux/slices/taskItemSlice";
 import { ItemFilter } from "../../types/allTypes";
 import TaskItem from "./TaskItem";
+import LoadingSpinner from "../LoadingSpinner";
 
 const DisplayTaskItems = () => {
   const { listId } = useParams();
@@ -69,7 +70,7 @@ const DisplayTaskItems = () => {
     }
   }, [data, filterItem, sortItem]);
 
-  if (isLoading) return <div>...Loading</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>Error</div>;
 
   return (

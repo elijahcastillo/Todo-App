@@ -6,10 +6,11 @@ export const StyledNavbar = styled.div`
     height: 100vh;
     position: fixed;
     top: 0;
-    box-shadow: 1px 2px 3px 2px #d3d3d3;
+    box-shadow: 1px 2px 2px 2px #d3d3d3;
     z-index: 20;
     background-color: #fff;
     transition: all 300ms ease-in-out;
+    overflow-y: auto;
   }
   .showNav {
     transform: translateX(0px) !important;
@@ -56,6 +57,17 @@ export const StyledNavbar = styled.div`
     font-size: 2.2em;
     color: #5ee484;
     font-family: "Rubik", sans-serif;
+  }
+
+  .logout {
+    background-color: #f44b4b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: "Rubik", sans-serif;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 20px 5px;
   }
 
   //Small Nav List Info

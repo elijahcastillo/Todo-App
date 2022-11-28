@@ -54,7 +54,9 @@ const Navbar = () => {
         <div className="middleSection">
           <GetTaskLists />
         </div>
-        <div className="bottomSection"></div>
+        <div className="bottomSection">
+          <button className="logout">Logout</button>
+        </div>
       </div>
     </StyledNavbar>
   );
