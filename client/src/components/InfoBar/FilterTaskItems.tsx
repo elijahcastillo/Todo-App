@@ -5,6 +5,7 @@ import { setFilter, setSort } from "../../redux/slices/taskItemSlice";
 import { ItemFilter, ItemDateSort } from "../../types/allTypes";
 import { useDeleteTaskListMutation } from "../../redux/api";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FilterTaskItems = () => {
   //Date.parse(... ms) for sort func
@@ -17,6 +18,7 @@ const FilterTaskItems = () => {
   const delList = () => {
     deleteList({ listId });
     navigate("/home/all");
+    toast.success("List Deleated");
   };
 
   return (

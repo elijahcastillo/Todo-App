@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import { StyledCreateList } from "../../css/CreateList.styled";
 import { StyledCreate } from "../../css/TaskHome.styled";
 import { Link } from "react-router-dom";
-
 import { useAddTaskListMutation } from "../../redux/api";
+import { toast } from "react-toastify";
 
 const CreateList = () => {
-  const [listName, setListName] = useState("");
+  const [listName, setListName] = useState<string>("");
 
   const [addNewTask] = useAddTaskListMutation();
 
   const addTask = () => {
-    addNewTask({ name: listName })
-      .unwrap()
-      .then((fulfilled) => console.log(fulfilled))
-      .catch((rejected) => console.error(rejected));
-
+    if (listName.length > 30) {
+      return toast.error("List Name too long");
+    }
+    addNewTask({ name: listName });
     setListName("");
   };
 

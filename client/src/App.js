@@ -7,10 +7,14 @@ import TaskHome from "./components/TaskItem/TaskHome";
 import Homepage from "./components/Homepage";
 import EditItem from "./components/TaskItem/EditItem";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Login />} />
 

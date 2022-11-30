@@ -4,6 +4,7 @@ export const StyledTaskHome = styled.div``;
 
 export const StyledCreate = styled.div`
   margin-bottom: 30px;
+  margin-top: 20px;
 
   .title {
     color: #666565a0;

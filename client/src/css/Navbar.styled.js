@@ -6,7 +6,7 @@ export const StyledNavbar = styled.div`
     height: 100vh;
     position: fixed;
     top: 0;
-    box-shadow: 1px 2px 2px 2px #d3d3d3;
+    box-shadow: 1px 1px 2px 2px #d3d3d3;
     z-index: 20;
     background-color: #fff;
     transition: all 300ms ease-in-out;
@@ -37,6 +37,12 @@ export const StyledNavbar = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
   }
 
+  .hamburg {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
   .topSection {
     display: flex;
     justify-content: space-around;
@@ -65,8 +71,8 @@ export const StyledNavbar = styled.div`
     border: none;
     cursor: pointer;
     font-family: "Rubik", sans-serif;
-    padding: 5px 10px;
-    border-radius: 10px;
+    padding: 8px 15px;
+
     margin: 20px 5px;
   }
 

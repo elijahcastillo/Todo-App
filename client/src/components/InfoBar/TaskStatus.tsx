@@ -2,8 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { StyledStatus } from "../../css/InfoBar.styled";
 
-//Todo: Display Number of compleated and not compleated Tasks. In Get task, disptach numbers to store, grab here
-
 const TaskStatus = () => {
   const { compleated, total } = useSelector((state: any) => state.taskItem);
 

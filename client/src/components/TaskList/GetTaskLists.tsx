@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import TaskListItem from "./TaskListItem";
 import { useGetAllTaskListsQuery } from "../../redux/api";
-import { useNavigate, useParams } from "react-router-dom";
 import { StyledListItem } from "../../css/TaskList.styled";
 import LoadingSpinner from "../LoadingSpinner";
+import { toast, ToastContainer } from "react-toastify";
+import { totalmem } from "os";
 
 export interface TaskList {
   id: number;
@@ -14,7 +15,11 @@ const GetTaskLists = () => {
   const { data, error, isLoading } = useGetAllTaskListsQuery(undefined);
 
   if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>Error</div>;
+  if (error) {
+    console.log("TASK LIST ERROR: ", error);
+    toast.error("Error fetching Task Lists");
+    return <div>Error...</div>;
+  }
 
   return (
     <StyledListItem>

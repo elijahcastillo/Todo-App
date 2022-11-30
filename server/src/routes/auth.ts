@@ -30,7 +30,7 @@ router.post("/register", async (req: Request, res: Response) => {
 
   //Hash incoming password
   const hashedPassword = await hash(password, 10).catch((error) => {
-    return console.log("Hash Error" + error);
+    return res.status(409).json({ error: "Something went wrong" });
   });
 
   console.log(hashedPassword);
@@ -43,7 +43,7 @@ router.post("/register", async (req: Request, res: Response) => {
     return res.status(500).json({ error: error.message });
   });
 
-  return true;
+  return res.status(200).json({ ok: true });
 });
 
 router.post("/login", async (req: Request, res: Response) => {
@@ -79,6 +79,10 @@ router.post("/login", async (req: Request, res: Response) => {
   sendRefreshToken(res, createRefreshToken(dbUser[0]));
 
   return res.status(200).json({ accessToken: token });
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  sendRefreshToken(res, "");
 });
 
 router.get("/check-token", isAuthenticated, (req: Request, res: Response) => {

@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/slices/authSlice";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 interface UserCredentials {
   username: string;
   password: string;
@@ -20,7 +23,14 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const validateForm = () => {
+    if (!username || !password) {
+      toast.error("Please fill out all fields");
+    }
+  };
+
   const loginUser = async () => {
+    validateForm();
     setLoading(true);
 
     const response = await axios
@@ -33,19 +43,25 @@ const Login = () => {
         { withCredentials: true }
       )
       .catch((error) => {
-        return console.log(error.response.data.error);
+        toast.error(error.response);
+        return console.log(error);
       });
 
     setLoading(false);
-    if (!response) return;
 
-    //console.log(response.data.accessToken);
+    //request never reached server
+    if (!response) {
+      return toast.error("Something went Wrong");
+    }
 
+    //request returned 200
+    toast.success("Login Successful!");
     dispatch(setToken(response.data.accessToken));
     navigate("/home/all");
   };
 
   const signUpUser = async () => {
+    validateForm();
     setLoading(true);
     const response = await axios
       .post("http://localhost:3001/auth/register", {
@@ -53,12 +69,18 @@ const Login = () => {
         password,
       } as UserCredentials)
       .catch((error) => {
+        toast.error("Could Not Create New Account");
+        setLoading(false);
         return console.log(error.response.data.error);
       });
-    setLoading(false);
-    if (!response) return;
 
-    console.log(response);
+    setLoading(false);
+    //request never reached server
+    if (!response) {
+      return toast.error("Something went Wrong");
+    }
+
+    toast.success("Account Created!");
   };
 
   return (

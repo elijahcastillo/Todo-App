@@ -8,7 +8,6 @@ import { setToken, setUsername } from "../redux/slices/authSlice";
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);
 
-  //{ auth: { username: string; accessToken: string } }
   const { accessToken } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -8,7 +8,7 @@ const CreateTaskItem = () => {
   const [taskDate, setTaskDate] = useState<string>("");
   const { listId } = useParams();
 
-  const [addNewItem, result] = useAddTaskItemMutation();
+  const [addNewItem] = useAddTaskItemMutation();
 
   const addItem = () => {
     addNewItem({

@@ -7,7 +7,7 @@ import { setNav } from "../../redux/slices/authSlice";
 
 const TaskListItem = ({ id, name }: TaskList) => {
   const dispatch = useDispatch();
-  const { listId, listName } = useParams();
+  const { listName } = useParams();
   return (
     <Link
       to={`/home/${id}/${name}`}

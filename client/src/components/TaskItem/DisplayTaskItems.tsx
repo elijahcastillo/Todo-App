@@ -7,6 +7,7 @@ import { setCompleated, setTotal } from "../../redux/slices/taskItemSlice";
 import { ItemFilter } from "../../types/allTypes";
 import TaskItem from "./TaskItem";
 import LoadingSpinner from "../LoadingSpinner";
+import { toast } from "react-toastify";
 
 const DisplayTaskItems = () => {
   const { listId } = useParams();
@@ -71,7 +72,11 @@ const DisplayTaskItems = () => {
   }, [data, filterItem, sortItem]);
 
   if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>Error</div>;
+  if (error) {
+    console.log("TASK LIST ERROR: ", error);
+    toast.error("Error fetching Task Lists");
+    return <div>Error...</div>;
+  }
 
   return (
     <>
