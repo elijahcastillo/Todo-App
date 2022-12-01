@@ -11,7 +11,7 @@ const CreateList = () => {
   const [addNewTask] = useAddTaskListMutation();
 
   const addTask = () => {
-    if (listName.length > 30) {
+    if (listName.length > 40) {
       return toast.error("List Name too long");
     }
     addNewTask({ name: listName });

@@ -26,11 +26,14 @@ const Login = () => {
   const validateForm = () => {
     if (!username || !password) {
       toast.error("Please fill out all fields");
+      return true;
     }
   };
 
   const loginUser = async () => {
-    validateForm();
+    if (validateForm()) {
+      return;
+    }
     setLoading(true);
 
     const response = await axios
@@ -48,6 +51,7 @@ const Login = () => {
       });
 
     setLoading(false);
+    console.log(response, "LLL");
 
     //request never reached server
     if (!response) {
@@ -61,7 +65,9 @@ const Login = () => {
   };
 
   const signUpUser = async () => {
-    validateForm();
+    if (validateForm()) {
+      return;
+    }
     setLoading(true);
     const response = await axios
       .post("http://localhost:3001/auth/register", {

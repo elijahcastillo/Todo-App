@@ -82,7 +82,8 @@ router.post("/login", async (req: Request, res: Response) => {
 });
 
 router.post("/logout", (req: Request, res: Response) => {
-  sendRefreshToken(res, "");
+  res.cookie("jid", "", { httpOnly: true });
+  return res.status(200).send("Ok");
 });
 
 router.get("/check-token", isAuthenticated, (req: Request, res: Response) => {

@@ -16,7 +16,7 @@ const TaskListItem = ({ id, name }: TaskList) => {
       }
       onClick={() => dispatch(setNav(false))}
     >
-      <div>{name}</div>
+      <div className="taskListName">{name}</div>
     </Link>
   );
 };

@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken, setUsername } from "../redux/slices/authSlice";
+import LoadingSpinner from "./LoadingSpinner";
 
 const ProtectedRoute = () => {
   const [loading, setLoading] = useState(true);
@@ -56,7 +57,7 @@ const ProtectedRoute = () => {
       });
   }, [accessToken]);
 
-  if (loading) return <div>loading...</div>;
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

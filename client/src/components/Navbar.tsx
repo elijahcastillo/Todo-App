@@ -26,7 +26,14 @@ const Navbar = () => {
   }, [listId]);
 
   const logoutUser = () => {
-    axios.post("http://localhost:3001/auth/logout");
+    axios
+      .post(
+        "http://localhost:3001/auth/logout",
+        { test: "ok" },
+        { withCredentials: true }
+      )
+      .then((res) => console.log(res));
+
     navigate("/");
     toast.success("Logged out");
   };
